@@ -1,0 +1,49 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <script>
+        function LikeHandler(id,whoYouLiked){
+            console.log(id);
+        }
+    </script>
+    <div id="container">
+        <div id="first-section">
+            <h1>All Posts</h1>
+        </div>
+        <hr>
+        {% for post in posts_of_the_page %}
+            <div id="post">
+                <div id="post-content">
+                    <h3><a style="color: red;" href="{% url 'profile' user_id=post.author.id %}">@{{ post.author }}</a></h3>
+                    <p class="content" id="content_{{ post.id }}">{{ post.content }}</p>
+                    <p>{{ post.created_at}}</p>
+                    {% if user.is_authenticated %}
+                        {% if user != post.author %}
+                            {% if post.id in whoYouLiked %}
+                            <button class="btn btn-info fa fa-thumbs-down" onclick="LikeHandler({{ post.id }}, {{ whoYouLiked }})"  id="{{ post.id }}"></button>
+                            {% else %}
+                            <button class="btn btn-info fa fa-thumbs-up" onclick="LikeHandler({{ post.id }}, {{ whoYouLiked}})" id="{{ post.id }}"></button>
+                            {% endif %}
+                        {% endif%}
+                    {% endif %}
+                </div>
+            </div> 
+             
+        {% endfor %}
+    </div>
+    <style>
+        #container {
+            margin: 20px;
+            height: auto;
+        }
+        #post{
+            border: 2px solid black;
+            border-radius: 10px;
+            margin-bottom: 2%;
+        }
+
+        #post-content {
+            margin: 20px;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,7 @@
+Pagination: Done
+New Post: Done
+All Posts: Pending
+Profile Page: Pending
+Following: Pending
+Edit Post: Pending
+“Like” and “Unlike”: Pending	
